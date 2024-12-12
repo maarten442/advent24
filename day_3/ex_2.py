@@ -36,5 +36,5 @@ def find_sum(input):
     return sum(result)
 
 if __name__ == "__main__":
-    data = get_lists_from_aoc("53616c7465645f5fcaf56c0ba80c36e571e19af439640117102e08c1077e3bfebecfb0f0ffd8212f6c3621362dbabbe2d378de409195c97295a9a7f7fcfd4acf") 
+    data = get_lists_from_aoc("") 
     print(find_sum(find_counting_mul(data)))
