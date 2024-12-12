@@ -20,11 +20,11 @@ def get_lists_from_aoc(cookie):
         list_1.append(list(map(int, line.split())))
     return list_1
 
-sample_matrix = [[7, 6, 4, 2, 1], [1, 2, 7, 8, 9], [9, 7, 6, 2, 1]]
+sample_matrix = [[7, 6, 4, 2, 1], [1, 2, 7, 8, 9], [9, 7, 6, 2, 1], [8, 4, 7, 6, 4]]
 
 def check_row(list):
     differences = [i - j for i, j in zip(list, list[1:])]
-    increasing = differences[0] < 0
+    # Need to check this in a different manner 
     for i in differences:
         if (increasing and i >= 0) or (not increasing and i <= 0):
             return 0
