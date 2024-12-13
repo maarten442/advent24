@@ -47,8 +47,19 @@ updates = """75,47,61,53,29
 61,13,29
 97,13,75,29,47"""
 
+def mapping_function(rule_dict, update_tuple):
+    for i, j in zip(update_tuple, update_tuple[1:]):
+        if j not in rule_dict[i]:
+            return False
+    return True
+            
+
 if __name__ == "__main__":
     parsed_rules = parse_rules(input)
     x, y = create_graphs(parsed_rules)
-    print(x)
-    parsed_updates = parse_updates(updates)        
+    print(x) # graph
+    print(y) # reversed graph
+    parsed_updates = parse_updates(updates)
+    valid = [mapping_function(x, j) for j in parsed_updates]
+    print(valid)
+    
