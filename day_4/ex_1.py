@@ -16,9 +16,7 @@ MXMAMMMSAAMSSSXSMMMMMAMMMXMMXXAAXMAMMAASMSXMASAXSXMAAXAAAMAMXSXXMASMMAMXMAAAXXMA
 # D E F
 # G H I
 
-test_string = "ABC\nDEF\GHI"
-
-test_zip = zip([row[i:] for i, row in enumerate(test_string.split("\n"))])
+test_string = "ABC\nDEF\nGHI"
 
 rows = test_input.split("\n")
 columns = [''.join(j) for j in (zip(*test_input.split("\n")))]
@@ -37,5 +35,5 @@ def find_matches(input):
 if __name__ == "__main__":
     # print(columns)
     print(os.environ.get("cookie"))
-    print(test_zip) 
+    print(list(test_zip))
     # print(re.findall(r'(?=(XMAS|SAMX))', test))
