@@ -189,14 +189,14 @@ class Game:
         new_position = add_tuples(self.orientation_guard, self.position_guard)
         if new_position in self.position_obstacles:
             self.orientation_guard = NEXT_OR.get(self.orientation_guard)
-            self.play_game()
+            # self.play_game()
         # check if the guard moves out of the game
         elif new_position[0] > self.width or new_position[0] < 0 or new_position[1] > self.height or new_position[1] < 0:
-            return
+            return 0
         else:
             self.positions_traced.add(new_position)
             self.position_guard = new_position
-            self.play_game()
+            # self.play_game()
 
 if __name__ == "__main__":
     game = Game(input_string=real_input)
@@ -206,5 +206,6 @@ if __name__ == "__main__":
     print(game.orientation_guard)
     print(game.width)
     print(game.height)
-    game.play_game()
-    print(game.positions_traced)
+    state = 1
+    while state:
+        state = game.play_game()
