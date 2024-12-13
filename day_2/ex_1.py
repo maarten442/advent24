@@ -1,12 +1,15 @@
 import math
 import requests
+from dotenv import load_dotenv
+
+load_dotenv()
 # We get a matrix and for each row we need to check that it is either increasing or decreasing monotonically with step size between 1 and 3
 
 def get_lists_from_aoc(cookie):
 
 # You'll need to include your session cookie
     cookies = {
-        'session': cookie  # Get this from your browser after logging in
+        'session': cookie
     }
 
     response = requests.get(
