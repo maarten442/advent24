@@ -35,5 +35,6 @@ def find_matches(input):
 if __name__ == "__main__":
     # print(columns)
     print(os.environ.get("cookie"))
-    print(list(test_zip))
+    print(test_string.split("\n"))
+    print(list(zip(*[row[idx:] for idx, row in enumerate(test_string.split("\n"))])))
     # print(re.findall(r'(?=(XMAS|SAMX))', test))
