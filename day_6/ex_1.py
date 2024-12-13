@@ -190,6 +190,7 @@ class Game:
         if new_position in self.position_obstacles:
             self.orientation_guard = NEXT_OR.get(self.orientation_guard)
             # self.play_game()
+            return 1
         # check if the guard moves out of the game
         elif new_position[0] > self.width or new_position[0] < 0 or new_position[1] > self.height or new_position[1] < 0:
             return 0
@@ -197,15 +198,19 @@ class Game:
             self.positions_traced.add(new_position)
             self.position_guard = new_position
             # self.play_game()
+            return 1
 
 if __name__ == "__main__":
     game = Game(input_string=real_input)
     game.parse_input_string()
-    print(game.position_obstacles)
-    print(game.positions_traced)
-    print(game.orientation_guard)
-    print(game.width)
-    print(game.height)
+    # print(game.position_obstacles)
+    # print(game.positions_traced)
+    # print(game.orientation_guard)
+    # print(game.width)
+    # print(game.height)
     state = 1
     while state:
         state = game.play_game()
+    print(game.positions_traced)
+    print(len(game.positions_traced))
+    print(130 ** 2)
