@@ -22,8 +22,6 @@ def find_matches(input):
     match_list = re.findall(r'(?=(XMAS|SAMX))', input)
     return len(match_list)
 
-
-
 if __name__ == "__main__":
     # print(columns)
     print(os.environ.get("cookie"))
