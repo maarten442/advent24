@@ -1,6 +1,8 @@
 import math
 import requests
-# We get a matrix and for each row we need to check that it is either increasing or decreasing monotonically with step size between 1 and 3
+from dotenv import load_dotenv
+
+load_dotenv()
 
 def get_lists_from_aoc(cookie):
 

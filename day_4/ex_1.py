@@ -4,12 +4,24 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-test_input = """SSSXSSMSXMMAXXAXMSSMSSMSXMASXXMXMMXMSXSMXMMSASXMMAMMMMMXSAXMAMASMASASXSXMMMSMAXMSAMXAAXXXAMXSAMSAAMMXASXMXXXXASXMMSMMMMMMMSMMSAMSSSMXSMMXSX
-MXMAMMMSAAMSSSXSMMMMMAMMMXMMXXAAXMAMMAASMSXMASAXSXMAAXAAAMAMXSXXMASMMAMXMAAAXXMASXSSMXAMSXMAMXXSMXXAMXXAXMSMMMMAAAXXAAAXAAAAXSAMMASXAMXXAMAS"""
+test_input = """
+SSSXSSMSXMMAXXAXMSSMSSMSXMASXXMXMMXMSXSMXMMSASXMMAMMMMMXSAXMAMASMASASXSXMMMSMAXMSAMXAAXXXAMXSAMSAAMMXASXMXXXXASXMMSMMMMMMMSMMSAMSSSMXSMMXSX
+MXMAMMMSAAMSSSXSMMMMMAMMMXMMXXAAXMAMMAASMSXMASAXSXMAAXAAAMAMXSXXMASMMAMXMAAAXXMASXSSMXAMSXMAMXXSMXXAMXXAXMSMMMMAAAXXAAAXAAAAXSAMMASXAMXXAMAS
+"""
+# test_dim = 10 x 2
+# (0, 0), (1, 1), (2, 2)
+# (1, 0), (2, 1)
+
+# A B C
+# D E F
+# G H I
+
+test_string = "ABC\nDEF\GHI"
+
+test_zip = zip([row[i:] for i, row in enumerate(test_string.split("\n"))])
 
 rows = test_input.split("\n")
 columns = [''.join(j) for j in (zip(*test_input.split("\n")))]
-
 diagonals = []
 
 test1 = "ABCD"
@@ -25,5 +37,5 @@ def find_matches(input):
 if __name__ == "__main__":
     # print(columns)
     print(os.environ.get("cookie"))
-    print(diagonals)
+    print(test_zip) 
     # print(re.findall(r'(?=(XMAS|SAMX))', test))
