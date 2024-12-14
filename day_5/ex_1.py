@@ -1,5 +1,10 @@
+import os
 import re
+import requests
 from collections import defaultdict
+from dotenv import load_dotenv
+
+load_dotenv()
 # Let's make a rule graph from these. 
 
 
@@ -53,13 +58,30 @@ def mapping_function(rule_dict, update_tuple):
             return False
     return True
             
+# Helper function
 
+def get_lists_from_aoc(cookie):
+
+# You'll need to include your session cookie
+    cookies = {
+        'session': cookie  # Get this from your browser after logging in
+    }
+
+    response = requests.get(
+        'https://adventofcode.com/2024/day/5/input',
+        cookies=cookies
+    )
+
+    return response.text.strip()
 if __name__ == "__main__":
+    cookie = os.environ.get("cookie")
+    total_input = get_lists_from_aoc(cookie=cookie)
+    input, updates = total_input.split("\n\n")
     parsed_rules = parse_rules(input)
     x, y = create_graphs(parsed_rules)
-    print(x) # graph
-    print(y) # reversed graph
     parsed_updates = parse_updates(updates)
     valid = [mapping_function(x, j) for j in parsed_updates]
-    print(valid)
+    print(sum(valid))
+
+# ADD THE MIDDLE PAGE NUMBER
     
