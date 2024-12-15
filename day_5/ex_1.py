@@ -23,7 +23,7 @@ def create_graphs(parsed_rules):
     return graph, reversed_graph
 
 
-input = """47|53
+input_test = """47|53
 97|13
 97|61
 97|47
@@ -45,19 +45,26 @@ input = """47|53
 75|13
 53|13"""
 
-updates = """75,47,61,53,29
+updates_test = """75,47,61,53,29
 97,61,53,29,13
 75,29,13
 75,97,47,61,53
 61,13,29
 97,13,75,29,47"""
 
+def get_middle_value(tuple):
+    mid_idx = len(tuple) // 2
+    return tuple[mid_idx]
+
 def mapping_function(rule_dict, update_tuple):
-    for i, j in zip(update_tuple, update_tuple[1:]):
-        if j not in rule_dict[i]:
-            return False
-    return True
-            
+    # need to check for all the pairs. 
+    for i in range(len(update_tuple)):
+        for j in range(i + 1, len(update_tuple)):
+            page_1, page_2 = update_tuple[i], update_tuple[j]
+            if page_1 in rule_dict[page_2]:
+                return False
+    return get_middle_value(update_tuple)
+
 # Helper function
 
 def get_lists_from_aoc(cookie):
@@ -73,13 +80,17 @@ def get_lists_from_aoc(cookie):
     )
 
     return response.text.strip()
+
 if __name__ == "__main__":
     cookie = os.environ.get("cookie")
     total_input = get_lists_from_aoc(cookie=cookie)
     input, updates = total_input.split("\n\n")
     parsed_rules = parse_rules(input)
+    print(len(parsed_rules))
     x, y = create_graphs(parsed_rules)
+    # print(x)
     parsed_updates = parse_updates(updates)
+    print(len(parsed_updates))
     valid = [mapping_function(x, j) for j in parsed_updates]
     print(sum(valid))
 
