@@ -59,7 +59,7 @@ width = len(rows[1])
 # map the grid to a representation of smt like
 # (x, y, antenna_type)
 
-antennaes = [(i, j, letter)for i, string in enumerate(rows) for j, letter in enumerate(string)]
+antennaes = [(i, j, letter) for i, string in enumerate(rows) for j, letter in enumerate(string)]
 antennae_groups = groupby(sorted(antennaes, key= lambda x: x[2]), key = lambda x : x[2])
 grouped_dict = {key: list(group) for key, group in antennae_groups}
 
@@ -70,12 +70,25 @@ grouped_dict = {key: list(group) for key, group in antennae_groups}
 
 
 def find_overlap(ant_1, ant_2):
+    # Get direction vector
     x_coord = ant_2[0] - ant_1[0]
     y_coord = ant_2[1] - ant_1[1]
     
-    pos_1 = (x_coord * 2 + ant_1[0], y_coord * 2 + ant_1[1])
-    pos_2 = (x_coord * -2 + ant_1[0], y_coord * -2 + ant_1[1])
-    return pos_1, pos_2
+    # Calculate length of vector
+    length = (x_coord**2 + y_coord**2)**0.5
+    
+    # Normalize vector and multiply by length to get points twice as far
+    if length > 0:  # Avoid division by zero
+        x_norm = (x_coord/length) * length
+        y_norm = (y_coord/length) * length
+    else:
+        return set()  # Return empty set if antennas are at same location
+    
+    # Calculate points that are twice as far in both directions
+    pos_1 = (round(x_norm + ant_1[0]), round(y_norm + ant_1[1]))
+    pos_2 = (round(-x_norm + ant_2[0]), round(-y_norm + ant_2[1]))
+    
+    return {pos_1, pos_2}
 
 
 
